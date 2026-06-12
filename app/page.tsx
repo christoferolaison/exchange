@@ -4,6 +4,7 @@ import Image from "next/image";
 import { connection } from "next/server";
 import type { ReactNode } from "react";
 import { getTranslations } from "next-intl/server";
+import Client from "./_components/client";
 
 type HomeProps = {
   params: Promise<Record<string, never>>;
@@ -21,6 +22,8 @@ export default async function Home({ params }: HomeProps) {
       className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black"
       data-has-route-params={hasRouteParams}
     >
+
+      <Client />
       <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
         <Image
           className="dark:invert"
