@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { connection } from "next/server";
 import type { ReactNode } from "react";
