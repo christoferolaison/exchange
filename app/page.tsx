@@ -1,26 +1,15 @@
-"use client";
-
 import Image from "next/image";
-import { connection } from "next/server";
 import type { ReactNode } from "react";
 import { getTranslations } from "next-intl/server";
 import Client from "./_components/client";
 
-type HomeProps = {
-  params: Promise<Record<string, never>>;
-};
-
-export default async function Home({ params }: HomeProps) {
-  await connection();
-  const routeParams = await params;
-  const hasRouteParams = Object.keys(routeParams).length > 0;
+export default async function Home() {
   const t = await getTranslations("HomePage");
   const linkClassName = "font-medium text-zinc-950 dark:text-zinc-50";
 
   return (
     <div
       className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black"
-      data-has-route-params={hasRouteParams}
     >
 
       <Client />
