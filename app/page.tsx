@@ -1,13 +1,24 @@
 import Image from "next/image";
+import { connection } from "next/server";
 import type { ReactNode } from "react";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
-export default function Home() {
-  const t = useTranslations("HomePage");
+type HomeProps = {
+  params: Promise<Record<string, never>>;
+};
+
+export default async function Home({ params }: HomeProps) {
+  await connection();
+  const routeParams = await params;
+  const hasRouteParams = Object.keys(routeParams).length > 0;
+  const t = await getTranslations("HomePage");
   const linkClassName = "font-medium text-zinc-950 dark:text-zinc-50";
 
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+    <div
+      className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black"
+      data-has-route-params={hasRouteParams}
+    >
       <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
         <Image
           className="dark:invert"
